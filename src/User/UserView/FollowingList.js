@@ -16,9 +16,9 @@ const FollowingList = ({following, onChangeUser}) => {
 				{ following
 						? following.map((follower, index) => (
 								<li key={ index }>
-									<span onClick={ onChangeUser(follower.login) }>{ follower.login }</span>
+									<span onClick={ onChangeUser(follower.login) } style={{cursor: 'pointer'}}>{ follower.login }</span>
 									<br />
-									<a href={ follower.html_url }>{ follower.html_url }</a>
+									<a href={ follower.html_url } target='_blank'>{ follower.html_url }</a>
 								</li>
 							))
 						: null
