@@ -1,0 +1,7 @@
+.card-content {
+	display: flex;
+}
+
+.card-statistic {
+	margin-left: 20px;
+}
