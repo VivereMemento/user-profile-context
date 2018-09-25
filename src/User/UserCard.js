@@ -48,16 +48,14 @@ export default class UserCard extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { userLogin } = this.state;
     
-    if (prevState.userLogin !== userLogin ) {
-      fetch(`https://api.github.com/users/${userLogin}`, {method: 'GET'})
-      .then(res => res.json())
-      .then(res => {
-        this.setState({...this.state, userData: res})
-      });
-    }
+    if (prevState.userLogin !== userLogin ) this.getData();
   }
 
   componentDidMount() {
+    this.getData();
+  }
+
+  getData = () => {
     const { userLogin } = this.state;
     fetch(`https://api.github.com/users/${userLogin}`, {method: 'GET'})
       .then(res => res.json())

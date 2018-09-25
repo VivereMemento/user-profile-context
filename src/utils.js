@@ -24,7 +24,8 @@ const getData = ({userData}) => ({data: userData});
 
 function usersListInHoc(WrappedComponent, usersUrl) {
 
-  return class extends Component {
+  return class UsersList extends Component {
+
     state = {};
 
     render() {
@@ -38,20 +39,14 @@ function usersListInHoc(WrappedComponent, usersUrl) {
 		}
 		
 		componentDidUpdate(prevProps) {
-      const { data } = this.props;
-			const url = data[usersUrl];
-      const key = url.split('{')[0].split('/').reverse()[0];
-      console.log('kdkdkdkdkd');
-
-      if(prevProps.data.login !== this.props.data.login) {
-        fetch(url.split('{')[0])
-				.then(res => res.json())
-				.then(res => this.setState({...this.state, [key]: res}))
-      }
-			
+      if(prevProps.data.login !== this.props.data.login) this.getData();
     }
 
     componentDidMount() {
+      this.getData();
+    }
+
+    getData = () => {
       const { data } = this.props;
 			const url = data[usersUrl];
       const key = url.split('{')[0].split('/').reverse()[0];
