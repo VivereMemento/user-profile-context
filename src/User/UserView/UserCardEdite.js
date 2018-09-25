@@ -56,11 +56,12 @@ class UserCardEdite extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		const { onEdite } = this.props;
+		const { onEdite, history } = this.props;
 		const { name, company, location, bio } = this.state;
 		
 		onEdite({userData: {name, company, location, bio}});
 		this.sendDataToServer({ name, company, location, bio });
+		history.push('/')
 	};
 
 	sendDataToServer = data => {
