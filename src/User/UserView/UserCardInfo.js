@@ -13,7 +13,7 @@ const UserCardInfo = (props) => {
 				<img className='card-img-top' src={ data.avatar_url } alt="avatar"/>
 				<div className='card-body'>
 					<h4 className='card-title'>
-						<Link to='/editing'>{ data.name }</Link>
+						<Link to={ `/${ data.login }/edit`}>{ data.name }</Link>
 					</h4>
 					<h5 className='card-title'>
 						{ data.login }

@@ -9,12 +9,12 @@ const UserCardNavigation = ({ data }) => {
 		<nav className='navbar navbar-expand-lg'>
 			<ul className='navbar-nav'>
 				<li className='nav-item'>
-					<NavLink className='nav-link' to='/followers' activeStyle={{ color: 'red' }}>
+					<NavLink className='nav-link' to={ `/${data.login}/followers` } activeStyle={{ color: 'red' }}>
 						followers: <span>({ data.followers })</span>
 					</NavLink>
 				</li>
 				<li className='nav-item'>
-					<NavLink className='nav-link' to='/following' activeStyle={{ color: 'red' }}>	
+					<NavLink className='nav-link' to={ `/${data.login}/following` } activeStyle={{ color: 'red' }}>	
 						following: <span>({ data.following })</span>
 					</NavLink>
 				</li>

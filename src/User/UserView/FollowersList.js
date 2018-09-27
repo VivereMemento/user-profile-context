@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { usersListInHoc } from '../../utils';
 import UserProvider from '../UserCardProvider';
@@ -19,7 +20,7 @@ const FollowersList = ({followers, onChangeUser}) => {
 					followers
 						? followers.map((follower, index) => (
 							<li key={ index } >
-								<span onClick={ onChangeUser(follower.login) } style={{cursor: 'pointer'}}>{ follower.login }</span>
+								<Link to={ `/${ follower.login }`} onClick={ onChangeUser(follower.login) } style={{cursor: 'pointer'}}>{ follower.login }</Link>
 								<br />
 								<a href={ follower.html_url } target='_blank'>{ follower.html_url }</a>
 							</li>

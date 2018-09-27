@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-const encode = str => new Buffer(str).toString('base64'); 
-const decode = base64 => new Buffer(base64, 'base64').toString('ascii');
 const idX = x => x;
 const createConnect = (Consumer, defSelector = idX) => {
   return (selector = defSelector) => Component => {
@@ -57,4 +55,4 @@ function usersListInHoc(WrappedComponent, usersUrl) {
   };
 }
 
-export { encode, decode, createConnect, getData, usersListInHoc };
+export { createConnect, getData, usersListInHoc };

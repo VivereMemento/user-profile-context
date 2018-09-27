@@ -5,13 +5,18 @@ import UserCardInfo from './UserCardInfo';
 import UserCardStatistic from './UserCardStatistic';
 
 const UserCardContent = (props) => {
-	const { data, showEdit, onChangeUser } = props;
+	const { data, onEdit, validateEditedData, onChangeUser } = props;
 
 	return (
-		<UserProvider data={ data } changeUser={ onChangeUser }>
+		<UserProvider
+			data={ data }
+			changeUser={ onChangeUser }
+			onEdit={ onEdit }
+			validateEditedData={ validateEditedData }
+		>
 			<div className='card-content'>
-				<UserCardInfo showEdit={ showEdit }/>
-				<UserCardStatistic />
+				<UserCardInfo />
+				<UserCardStatistic	/>
 			</div>
 		</UserProvider>
 	);

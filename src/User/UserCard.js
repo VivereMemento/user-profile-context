@@ -1,14 +1,12 @@
 import './user.css';
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import UserCardContent from './UserView/UserCardContent';
-import UserCardEdite from './UserView/UserCardEdite';
 
 export default class UserCard extends Component {
   state = {
     userData: {},
-    isEditing: false,
-    userLogin: 'gaearon'
+    userLogin: '',
   }
   render () {
     
@@ -16,31 +14,25 @@ export default class UserCard extends Component {
           
     return (
       <div className='user-card'>
-        <Switch>
-          <Route
-            path='/editing'
-            render={ props => (
-              <UserCardEdite
-                onCancel={ this.onCancel }
-                onEdite={ this.onEdite }
-                validateEditedData={ this.validateEditedData }
-                { ...props }
-              />
-            )}
+        <Route
+            path={ `/:login`}
+            render={ props => {
+              const { userLogin } = this.state;
+              if (userLogin !== props.match.params.login) {
+                this.getData(props.match.params.login)
+              }
+              return (
+                <UserCardContent
+                  data={ userData }
+                  onEdit={ this.onEdit}
+                  validateEditedData={ this.validateEditedData }
+                  onChangeUser={ this.changeUser }
+                  { ...props }
+                />
+              )
+            }}
           >
           </Route>
-          <Route
-            path='/'
-            render={ props => (
-              <UserCardContent
-                data={ userData }
-                onChangeUser={ this.changeUser }
-                { ...props }
-              />
-            )}
-          >
-          </Route>
-        </Switch>
       </div>
     )
   }
@@ -48,19 +40,15 @@ export default class UserCard extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { userLogin } = this.state;
     
-    if (prevState.userLogin !== userLogin ) this.getData();
+    if (prevState.userLogin !== userLogin ) this.getData(userLogin);
   }
 
-  componentDidMount() {
-    this.getData();
-  }
-
-  getData = () => {
-    const { userLogin } = this.state;
-    fetch(`https://api.github.com/users/${userLogin}`, {method: 'GET'})
+  getData = (login) => {
+  
+    fetch(`https://api.github.com/users/${login}`, {method: 'GET'})
       .then(res => res.json())
       .then(res => {
-        this.setState({...this.state, userData: res})
+        this.setState({...this.state, userData: res, userLogin: res.login})
       });
   }
 
@@ -74,8 +62,8 @@ export default class UserCard extends Component {
 
   onCancel = () => this.setState({isEditing: !this.state.isEditing})
 
-  onEdite = data => {
+  onEdit = data => {
     if(data) this.validateEditedData(data.userData);
-    this.setState({userData: {...this.state.userData, ...data.userData}, isEditing: !this.state.isEditing});
+    this.setState({userData: {...this.state.userData, ...data.userData}});
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 
-class UserCardEdite extends Component {
+class UserCardEdit extends Component {
 	state = { 
 		token: '',
 		name: '',
@@ -43,7 +43,7 @@ class UserCardEdite extends Component {
 						? <button className='btn btn-primary' type='submit'>Submit</button>
 						: null 
 				}
-				<Link to='/' className='btn btn-danger'>Cancel</Link>
+				<Link to={ `/${ this.props.login }`} className='btn btn-danger'>Cancel</Link>
 			</form>
 		);
 	}
@@ -56,12 +56,12 @@ class UserCardEdite extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		const { onEdite, history } = this.props;
+		const { onEdit, history } = this.props;
 		const { name, company, location, bio } = this.state;
 		
-		onEdite({userData: {name, company, location, bio}});
+		onEdit({userData: {name, company, location, bio}});
 		this.sendDataToServer({ name, company, location, bio });
-		history.push('/')
+		history.push(`/${ this.props.login }`)
 	};
 
 	sendDataToServer = data => {
@@ -80,10 +80,9 @@ class UserCardEdite extends Component {
 	}
 };
 
-UserCardEdite.propTypes = {
-	onCancel: PropTypes.func.isRequired,
-	onEdite: PropTypes.func.isRequired,
+UserCardEdit.propTypes = {
+	onEdit: PropTypes.func.isRequired,
 	validateEditedData: PropTypes.func.isRequired
 };
  
-export default UserCardEdite;
+export default UserCardEdit;

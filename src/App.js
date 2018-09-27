@@ -6,7 +6,7 @@ import UserCard from './User/UserCard';
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router basename='/'>
         <div className="container">
           <div className="row">
             <div className="col">

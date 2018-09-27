@@ -32,6 +32,8 @@ class UserProvider extends React.Component {
   getContext() {
     return {
       ...this.state,
+      onEdit: this.props.onEdit,
+      validateEditedData: this.props.validateEditedData,
       changeUser: this.props.changeUser,
     };
   }
