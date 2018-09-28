@@ -12,6 +12,7 @@ class UserCardEdit extends Component {
 	}
 	render() {
 		const { token } = this.state;
+		const { url, login } = this.props;
 
 		return (
 			<form onSubmit={ this.handleSubmit }>
@@ -43,7 +44,7 @@ class UserCardEdit extends Component {
 						? <button className='btn btn-primary' type='submit'>Submit</button>
 						: null 
 				}
-				<Link to={ `/${ this.props.login }`} className='btn btn-danger'>Cancel</Link>
+				<Link to={ `/${ url }/${ login }`} className='btn btn-danger'>Cancel</Link>
 			</form>
 		);
 	}
@@ -56,12 +57,12 @@ class UserCardEdit extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		const { onEdit, history } = this.props;
+		const { url, login, onEdit, history } = this.props;
 		const { name, company, location, bio } = this.state;
 		
 		onEdit({userData: {name, company, location, bio}});
 		this.sendDataToServer({ name, company, location, bio });
-		history.push(`/${ this.props.login }`)
+		history.push(`/${ url }/${ login }`)
 	};
 
 	sendDataToServer = data => {

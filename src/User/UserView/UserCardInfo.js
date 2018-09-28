@@ -6,14 +6,14 @@ import { getData } from '../../utils';
 import UserProvider from '../UserCardProvider';
 
 const UserCardInfo = (props) => {
-	const { data } = props;
+	const { url, data } = props;
 	return (
 		
 			<div className='card' style={{width: '50%'}}>
 				<img className='card-img-top' src={ data.avatar_url } alt="avatar"/>
 				<div className='card-body'>
 					<h4 className='card-title'>
-						<Link to={ `/${ data.login }/edit`}>{ data.name }</Link>
+						<Link to={ `/${url}/${ data.login }/edit`}>{ data.name }</Link>
 					</h4>
 					<h5 className='card-title'>
 						{ data.login }

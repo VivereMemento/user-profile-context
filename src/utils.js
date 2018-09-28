@@ -18,7 +18,7 @@ const createConnect = (Consumer, defSelector = idX) => {
     return Connected;
   }
 };
-const getData = ({userData}) => ({data: userData});
+const getData = ({url, userData}) => ({url: url, data: userData});
 
 function usersListInHoc(WrappedComponent, usersUrl) {
 

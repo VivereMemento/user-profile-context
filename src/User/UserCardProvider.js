@@ -3,6 +3,7 @@ import React from "react";
 import { createConnect } from '../utils';
 
 const initialState = {
+  url: null,
 	userData: null,
 	_prev: {},
 }
@@ -15,7 +16,7 @@ class UserProvider extends React.Component {
 	static getDerivedStateFromProps({ children, ...props }, state) {
 		console.log("getDerivedStateFromProps", props);
 		return props.data !== state._prev.data
-      ? { ...state, userData: props.data, _prev: props }
+      ? { ...state, url: props.url, userData: props.data, _prev: props }
       : null;
   }
 

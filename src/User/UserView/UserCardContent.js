@@ -5,10 +5,11 @@ import UserCardInfo from './UserCardInfo';
 import UserCardStatistic from './UserCardStatistic';
 
 const UserCardContent = (props) => {
-	const { data, onEdit, validateEditedData, onChangeUser } = props;
+	const { url, data, onEdit, validateEditedData, onChangeUser } = props;
 
 	return (
 		<UserProvider
+			url={ url }
 			data={ data }
 			changeUser={ onChangeUser }
 			onEdit={ onEdit }

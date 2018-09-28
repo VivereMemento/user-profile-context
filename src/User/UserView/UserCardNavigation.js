@@ -4,17 +4,17 @@ import { NavLink } from 'react-router-dom';
 import { getData } from '../../utils';
 import UserProvider from '../UserCardProvider';
 
-const UserCardNavigation = ({ data }) => {
+const UserCardNavigation = ({ url, data }) => {
 	return (
 		<nav className='navbar navbar-expand-lg'>
 			<ul className='navbar-nav'>
 				<li className='nav-item'>
-					<NavLink className='nav-link' to={ `/${data.login}/followers` } activeStyle={{ color: 'red' }}>
+					<NavLink className='nav-link' to={ `/${url}/${data.login}/followers` } activeStyle={{ color: 'red' }}>
 						followers: <span>({ data.followers })</span>
 					</NavLink>
 				</li>
 				<li className='nav-item'>
-					<NavLink className='nav-link' to={ `/${data.login}/following` } activeStyle={{ color: 'red' }}>	
+					<NavLink className='nav-link' to={ `/${url}/${data.login}/following` } activeStyle={{ color: 'red' }}>	
 						following: <span>({ data.following })</span>
 					</NavLink>
 				</li>

@@ -5,17 +5,18 @@ import UserCardContent from './UserView/UserCardContent';
 
 export default class UserCard extends Component {
   state = {
+    url: 'user-profile-context',
     userData: {},
     userLogin: '',
   }
   render () {
     
-    const { userData } = this.state;
+    const { url, userData } = this.state;
           
     return (
       <div className='user-card'>
         <Route
-            path={ `/:login`}
+            path={ `/${url}/:login`}
             render={ props => {
               const { userLogin } = this.state;
               if (userLogin !== props.match.params.login) {
@@ -23,6 +24,7 @@ export default class UserCard extends Component {
               }
               return (
                 <UserCardContent
+                  url={ url }
                   data={ userData }
                   onEdit={ this.onEdit}
                   validateEditedData={ this.validateEditedData }

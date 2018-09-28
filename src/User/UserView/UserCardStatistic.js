@@ -9,28 +9,30 @@ import FollowingList from './FollowingList';
 
 const getProps = props => {
 	return {
+		url: props.url,
 		data: props.userData,
 		onEdit: props.onEdit,
 		validateEditedData: props.validateEditedData,
 	}
 };
 
-const UserCardStatistic = ({ data, onEdit, validateEditedData }) => {
+const UserCardStatistic = ({ url, data, onEdit, validateEditedData }) => {
 
 	return (
 		<div className='card-statistic' style={{width: '50%'}}>
 			<Route
-				path={ `/${data.login}/:users?` }
+				path={ `/${url}/${data.login}/:users?` }
 				render={ ({ match }) => match.params.users !== 'edit' ? <UserCardNavigation /> : null }
 			/>
 			<Switch>
-				<Route path={ `/${data.login}/followers` } render={ props => <FollowersList { ...props } /> }/>
-				<Route path={ `/${data.login}/following` } render={ props => <FollowingList { ...props } /> }/>
+				<Route path={ `/${url}/${data.login}/followers` } render={ props => <FollowersList { ...props } /> }/>
+				<Route path={ `/${url}/${data.login}/following` } render={ props => <FollowingList { ...props } /> }/>
 			</Switch>
 			<Route
-						path={ `/${ data.login }/edit` }
+						path={ `/${url}/${ data.login }/edit` }
 						render={ props => (
 							<UserCardEdit
+								url={ url }
 								login={ data.login }
 								onEdit={ onEdit }
 								validateEditedData={ validateEditedData }
